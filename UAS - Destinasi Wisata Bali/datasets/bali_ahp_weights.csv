@@ -1,0 +1,7 @@
+Kode,Kriteria,Tipe,Satuan,Bobot_AHP,Persentase,LambdaMax,CI,RI,CR,Status
+C1,Daya Tarik Wisata,benefit,Skor (0-100),0.373347,37.33,6.069843,0.013969,1.24,0.011265,KONSISTEN
+C2,Aksesibilitas,benefit,Skor (0-100),0.228012,22.80,6.069843,0.013969,1.24,0.011265,KONSISTEN
+C3,Fasilitas & Amenitas,benefit,Skor (0-100),0.134849,13.48,6.069843,0.013969,1.24,0.011265,KONSISTEN
+C4,Popularitas / Rating,benefit,Skala (1.0-5.0),0.134849,13.48,6.069843,0.013969,1.24,0.011265,KONSISTEN
+C5,Biaya / Harga Tiket,cost,Rupiah (Rp),0.077249,7.72,6.069843,0.013969,1.24,0.011265,KONSISTEN
+C6,Jarak dari Bandara,cost,Kilometer (km),0.051694,5.17,6.069843,0.013969,1.24,0.011265,KONSISTEN

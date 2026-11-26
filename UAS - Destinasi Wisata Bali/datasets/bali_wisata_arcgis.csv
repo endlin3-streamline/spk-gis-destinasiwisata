@@ -1,0 +1,28 @@
+ID,Nama,Kabupaten,Kategori,Latitude,Longitude,DayaTarik,Akses,Fasilitas,Rating,HargaTiket,JarakBdr,D_Plus,D_Minus,SkorTOPSIS,Rank,KelasPot
+W05,Pantai Kuta,Kabupaten Badung,Pantai,-8.718500,115.168600,88,98,96,4.5,15000,4.8,0.008361,0.050610,0.858224,1,Sangat Potensial
+W10,Pura Tanah Lot,Kabupaten Tabanan,Budaya & Sejarah,-8.621200,115.086800,97,92,93,4.6,30000,28.5,0.008090,0.047839,0.855345,2,Sangat Potensial
+W01,Pantai Sanur,Kota Denpasar,Pantai,-8.693500,115.263300,87,95,93,4.5,15000,15.2,0.009501,0.048523,0.836260,3,Sangat Potensial
+W04,Pura Luhur Uluwatu,Kabupaten Badung,Budaya & Sejarah,-8.829100,115.084900,96,91,92,4.7,35000,21.5,0.009696,0.046514,0.827499,4,Sangat Potensial
+W07,Terasering Tegalalang,Kabupaten Gianyar,Alam & Pegunungan,-8.431200,115.279300,94,85,87,4.5,25000,46.5,0.011523,0.044241,0.793364,5,Sangat Potensial
+W19,Desa Adat Penglipuran,Kabupaten Bangli,Budaya & Sejarah,-8.422000,115.359600,94,84,89,4.8,25000,52.5,0.012155,0.043965,0.783405,6,Sangat Potensial
+W11,Pura Ulun Danu Beratan,Kabupaten Tabanan,Alam & Pegunungan,-8.275200,115.166800,95,83,90,4.6,35000,62.4,0.015086,0.041615,0.733946,7,Sangat Potensial
+W09,Pura Tirta Empul,Kabupaten Gianyar,Budaya & Sejarah,-8.415700,115.315400,92,84,86,4.6,40000,50.8,0.015891,0.039557,0.713415,8,Potensial
+W20,Gunung & Danau Batur (Kintamani),Kabupaten Bangli,Alam & Pegunungan,-8.282500,115.367600,95,80,85,4.7,35000,68.0,0.016798,0.040323,0.705917,9,Potensial
+W02,Monumen Bajra Sandhi,Kota Denpasar,Budaya & Sejarah,-8.671700,115.233900,76,95,86,4.5,25000,14.5,0.018956,0.042453,0.691319,10,Potensial
+W03,Taman Werdhi Budaya (Art Centre),Kota Denpasar,Budaya & Sejarah,-8.654800,115.232300,72,92,82,4.4,15000,16.0,0.022188,0.042961,0.659431,11,Potensial
+W08,Sacred Monkey Forest Ubud,Kabupaten Gianyar,Ekowisata,-8.519400,115.260600,91,89,91,4.5,60000,36.2,0.020708,0.038688,0.651360,12,Potensial
+W12,Sawah Terasering Jatiluwih,Kabupaten Tabanan,Ekowisata,-8.368800,115.132200,92,72,76,4.7,35000,54.0,0.020010,0.037247,0.650521,13,Potensial
+W16,Pura Agung Besakih,Kabupaten Karangasem,Budaya & Sejarah,-8.374300,115.450900,95,77,85,4.6,50000,66.5,0.021312,0.036931,0.634084,14,Potensial
+W14,Kertha Gosa (Taman Gili),Kabupaten Klungkung,Budaya & Sejarah,-8.535600,115.403300,75,86,78,4.4,25000,42.5,0.022098,0.037033,0.626289,15,Potensial
+W13,Pantai Kelingking (Nusa Penida),Kabupaten Klungkung,Pantai,-8.751300,115.474300,98,60,70,4.7,35000,52.0,0.025259,0.039177,0.607993,16,Potensial
+W22,Pantai Lovina,Kabupaten Buleleng,Bahari & Snorkeling,-8.157800,115.025300,84,72,80,4.4,20000,89.5,0.023409,0.035956,0.605679,17,Potensial
+W06,Garuda Wisnu Kencana (GWK),Kabupaten Badung,Budaya & Sejarah,-8.810400,115.167600,93,94,96,4.6,85000,11.2,0.029174,0.042158,0.591008,18,Potensial
+W18,Pantai Amed,Kabupaten Karangasem,Bahari & Snorkeling,-8.334700,115.647600,86,68,76,4.5,20000,95.0,0.024861,0.035769,0.589956,19,Potensial
+W21,Air Terjun Tukad Cepung,Kabupaten Bangli,Alam & Pegunungan,-8.441000,115.386900,84,66,68,4.5,25000,53.8,0.024625,0.034625,0.584389,20,Potensial
+W17,Taman Tirta Gangga,Kabupaten Karangasem,Budaya & Sejarah,-8.412300,115.587300,88,74,82,4.6,45000,78.2,0.023401,0.032409,0.580697,21,Potensial
+W23,Air Terjun Sekumpul,Kabupaten Buleleng,Alam & Pegunungan,-8.172500,115.186900,92,60,67,4.7,30000,81.0,0.027113,0.035287,0.565496,22,Cukup Potensial
+W25,Pantai Medewi,Kabupaten Jembrana,Pantai,-8.419700,114.805800,76,70,70,4.4,15000,74.5,0.027531,0.034528,0.556376,23,Cukup Potensial
+W15,Pantai Diamond (Nusa Penida),Kabupaten Klungkung,Pantai,-8.776400,115.620300,95,56,66,4.7,40000,64.0,0.028892,0.035245,0.549526,24,Cukup Potensial
+W27,Bunut Bolong,Kabupaten Jembrana,Alam & Pegunungan,-8.359600,114.828600,66,58,55,4.3,15000,84.0,0.038892,0.030492,0.439470,25,Kurang Potensial
+W26,Pantai Baluk Rening,Kabupaten Jembrana,Pantai,-8.374600,114.576100,62,64,58,4.2,15000,105.0,0.040329,0.030090,0.427302,26,Kurang Potensial
+W24,Pulau Menjangan (TNBB),Kabupaten Buleleng,Bahari & Snorkeling,-8.097800,114.514200,93,52,66,4.8,60000,142.0,0.039455,0.027809,0.413424,27,Kurang Potensial

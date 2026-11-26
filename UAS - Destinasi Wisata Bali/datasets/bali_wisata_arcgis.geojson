@@ -1,0 +1,838 @@
+{
+    "type":  "FeatureCollection",
+    "name":  "bali_wisata_ahp_topsis",
+    "crs":  {
+                "type":  "name",
+                "properties":  {
+                                   "name":  "urn:ogc:def:crs:OGC:1.3:CRS84"
+                               }
+            },
+    "metadata":  {
+                     "method":  "AHP-TOPSIS",
+                     "lambdaMax":  6.069843,
+                     "consistencyIndex":  0.013969,
+                     "randomIndex":  1.24,
+                     "consistencyRatio":  0.011265,
+                     "isConsistent":  true,
+                     "weights":  {
+                                     "C1":  0.373347,
+                                     "C2":  0.228012,
+                                     "C3":  0.134849,
+                                     "C4":  0.134849,
+                                     "C5":  0.077249,
+                                     "C6":  0.051694
+                                 }
+                 },
+    "features":  [
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.1686,
+                                                              -8.7185
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W05",
+                                            "Nama":  "Pantai Kuta",
+                                            "Kabupaten":  "Kabupaten Badung",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.7185,
+                                            "Longitude":  115.1686,
+                                            "DayaTarik":  88,
+                                            "Akses":  98,
+                                            "Fasilitas":  96,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  4.8,
+                                            "D_Plus":  0.008361,
+                                            "D_Minus":  0.05061,
+                                            "SkorTOPSIS":  0.858224,
+                                            "Rank":  1,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Destinasi pantai ikonik Bali dengan pasir putih luas, ombak ideal untuk peselancar pemula, dan fasilitas pariwisata lengkap."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.0868,
+                                                              -8.6212
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W10",
+                                            "Nama":  "Pura Tanah Lot",
+                                            "Kabupaten":  "Kabupaten Tabanan",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.6212,
+                                            "Longitude":  115.0868,
+                                            "DayaTarik":  97,
+                                            "Akses":  92,
+                                            "Fasilitas":  93,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  30000,
+                                            "JarakBdr":  28.5,
+                                            "D_Plus":  0.00809,
+                                            "D_Minus":  0.047839,
+                                            "SkorTOPSIS":  0.855345,
+                                            "Rank":  2,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Pura laut ikonik di atas batu karang lepas pantai yang menawarkan pemandangan matahari terbenam spektakuler."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.2633,
+                                                              -8.6935
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W01",
+                                            "Nama":  "Pantai Sanur",
+                                            "Kabupaten":  "Kota Denpasar",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.6935,
+                                            "Longitude":  115.2633,
+                                            "DayaTarik":  87,
+                                            "Akses":  95,
+                                            "Fasilitas":  93,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  15.2,
+                                            "D_Plus":  0.009501,
+                                            "D_Minus":  0.048523,
+                                            "SkorTOPSIS":  0.83626,
+                                            "Rank":  3,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Pantai pesisir timur Denpasar yang terkenal dengan matahari terbit, jalur pejalan kaki tepi pantai, dan perairan tenang."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.0849,
+                                                              -8.8291
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W04",
+                                            "Nama":  "Pura Luhur Uluwatu",
+                                            "Kabupaten":  "Kabupaten Badung",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.8291,
+                                            "Longitude":  115.0849,
+                                            "DayaTarik":  96,
+                                            "Akses":  91,
+                                            "Fasilitas":  92,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  35000,
+                                            "JarakBdr":  21.5,
+                                            "D_Plus":  0.009696,
+                                            "D_Minus":  0.046514,
+                                            "SkorTOPSIS":  0.827499,
+                                            "Rank":  4,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Pura sakral di atas tebing karang curam setinggi 70 meter menghadap Samudra Hindia dengan pertunjukan Tari Kecak saat senja."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.2793,
+                                                              -8.4312
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W07",
+                                            "Nama":  "Terasering Tegalalang",
+                                            "Kabupaten":  "Kabupaten Gianyar",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.4312,
+                                            "Longitude":  115.2793,
+                                            "DayaTarik":  94,
+                                            "Akses":  85,
+                                            "Fasilitas":  87,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  25000,
+                                            "JarakBdr":  46.5,
+                                            "D_Plus":  0.011523,
+                                            "D_Minus":  0.044241,
+                                            "SkorTOPSIS":  0.793364,
+                                            "Rank":  5,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Lanskap sawah berundak sistem subak tradisional khas Ubud dengan panorama lembah hijau dan spot foto ikonik."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.3596,
+                                                              -8.422
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W19",
+                                            "Nama":  "Desa Adat Penglipuran",
+                                            "Kabupaten":  "Kabupaten Bangli",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.422,
+                                            "Longitude":  115.3596,
+                                            "DayaTarik":  94,
+                                            "Akses":  84,
+                                            "Fasilitas":  89,
+                                            "Rating":  4.8,
+                                            "HargaTiket":  25000,
+                                            "JarakBdr":  52.5,
+                                            "D_Plus":  0.012155,
+                                            "D_Minus":  0.043965,
+                                            "SkorTOPSIS":  0.783405,
+                                            "Rank":  6,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Salah satu desa terbersih di dunia dengan tata ruang tradisional Tri Mandala, arsitektur seragam, dan hutan bambu."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.1668,
+                                                              -8.2752
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W11",
+                                            "Nama":  "Pura Ulun Danu Beratan",
+                                            "Kabupaten":  "Kabupaten Tabanan",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.2752,
+                                            "Longitude":  115.1668,
+                                            "DayaTarik":  95,
+                                            "Akses":  83,
+                                            "Fasilitas":  90,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  35000,
+                                            "JarakBdr":  62.4,
+                                            "D_Plus":  0.015086,
+                                            "D_Minus":  0.041615,
+                                            "SkorTOPSIS":  0.733946,
+                                            "Rank":  7,
+                                            "KelasPot":  "Sangat Potensial",
+                                            "Deskripsi":  "Pura terapung di tepi Danau Beratan dataran tinggi Bedugul dengan udara sejuk dan latar pegunungan berkabut."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.3154,
+                                                              -8.4157
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W09",
+                                            "Nama":  "Pura Tirta Empul",
+                                            "Kabupaten":  "Kabupaten Gianyar",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.4157,
+                                            "Longitude":  115.3154,
+                                            "DayaTarik":  92,
+                                            "Akses":  84,
+                                            "Fasilitas":  86,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  40000,
+                                            "JarakBdr":  50.8,
+                                            "D_Plus":  0.015891,
+                                            "D_Minus":  0.039557,
+                                            "SkorTOPSIS":  0.713415,
+                                            "Rank":  8,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Pura sumber mata air suci di Tampaksiring yang dikenal dengan tradisi melukat dan arsitektur Bali klasik."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.3676,
+                                                              -8.2825
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W20",
+                                            "Nama":  "Gunung \u0026 Danau Batur (Kintamani)",
+                                            "Kabupaten":  "Kabupaten Bangli",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.2825,
+                                            "Longitude":  115.3676,
+                                            "DayaTarik":  95,
+                                            "Akses":  80,
+                                            "Fasilitas":  85,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  35000,
+                                            "JarakBdr":  68,
+                                            "D_Plus":  0.016798,
+                                            "D_Minus":  0.040323,
+                                            "SkorTOPSIS":  0.705917,
+                                            "Rank":  9,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Kawasan geopark UNESCO dengan kaldera gunung berapi aktif, danau kawah luas, serta spot trekking matahari terbit."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.2339,
+                                                              -8.6717
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W02",
+                                            "Nama":  "Monumen Bajra Sandhi",
+                                            "Kabupaten":  "Kota Denpasar",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.6717,
+                                            "Longitude":  115.2339,
+                                            "DayaTarik":  76,
+                                            "Akses":  95,
+                                            "Fasilitas":  86,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  25000,
+                                            "JarakBdr":  14.5,
+                                            "D_Plus":  0.018956,
+                                            "D_Minus":  0.042453,
+                                            "SkorTOPSIS":  0.691319,
+                                            "Rank":  10,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Monumen perjuangan rakyat Bali di kawasan Lapangan Puputan Margarana Renon dengan diorama sejarah lengkap."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.2323,
+                                                              -8.6548
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W03",
+                                            "Nama":  "Taman Werdhi Budaya (Art Centre)",
+                                            "Kabupaten":  "Kota Denpasar",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.6548,
+                                            "Longitude":  115.2323,
+                                            "DayaTarik":  72,
+                                            "Akses":  92,
+                                            "Fasilitas":  82,
+                                            "Rating":  4.4,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  16,
+                                            "D_Plus":  0.022188,
+                                            "D_Minus":  0.042961,
+                                            "SkorTOPSIS":  0.659431,
+                                            "Rank":  11,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Kompleks pusat pelestarian seni dan budaya Bali serta lokasi penyelenggaraan Pesta Kesenian Bali tahunan."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.2606,
+                                                              -8.5194
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W08",
+                                            "Nama":  "Sacred Monkey Forest Ubud",
+                                            "Kabupaten":  "Kabupaten Gianyar",
+                                            "Kategori":  "Ekowisata",
+                                            "Latitude":  -8.5194,
+                                            "Longitude":  115.2606,
+                                            "DayaTarik":  91,
+                                            "Akses":  89,
+                                            "Fasilitas":  91,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  60000,
+                                            "JarakBdr":  36.2,
+                                            "D_Plus":  0.020708,
+                                            "D_Minus":  0.038688,
+                                            "SkorTOPSIS":  0.65136,
+                                            "Rank":  12,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Cagar alam hutan suci Mandala Suci Wenara Wana di jantung Ubud yang dihuni ratusan kera ekor panjang dan pura kuno."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.1322,
+                                                              -8.3688
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W12",
+                                            "Nama":  "Sawah Terasering Jatiluwih",
+                                            "Kabupaten":  "Kabupaten Tabanan",
+                                            "Kategori":  "Ekowisata",
+                                            "Latitude":  -8.3688,
+                                            "Longitude":  115.1322,
+                                            "DayaTarik":  92,
+                                            "Akses":  72,
+                                            "Fasilitas":  76,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  35000,
+                                            "JarakBdr":  54,
+                                            "D_Plus":  0.02001,
+                                            "D_Minus":  0.037247,
+                                            "SkorTOPSIS":  0.650521,
+                                            "Rank":  13,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Warisan Budaya Dunia UNESCO dengan hamparan sawah subak terluas di Bali di kaki Gunung Batukaru."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.4509,
+                                                              -8.3743
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W16",
+                                            "Nama":  "Pura Agung Besakih",
+                                            "Kabupaten":  "Kabupaten Karangasem",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.3743,
+                                            "Longitude":  115.4509,
+                                            "DayaTarik":  95,
+                                            "Akses":  77,
+                                            "Fasilitas":  85,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  50000,
+                                            "JarakBdr":  66.5,
+                                            "D_Plus":  0.021312,
+                                            "D_Minus":  0.036931,
+                                            "SkorTOPSIS":  0.634084,
+                                            "Rank":  14,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Kompleks pura terbesar dan tersuci di Bali di lereng barat daya Gunung Agung dengan puluhan pura berundak."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.4033,
+                                                              -8.5356
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W14",
+                                            "Nama":  "Kertha Gosa (Taman Gili)",
+                                            "Kabupaten":  "Kabupaten Klungkung",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.5356,
+                                            "Longitude":  115.4033,
+                                            "DayaTarik":  75,
+                                            "Akses":  86,
+                                            "Fasilitas":  78,
+                                            "Rating":  4.4,
+                                            "HargaTiket":  25000,
+                                            "JarakBdr":  42.5,
+                                            "D_Plus":  0.022098,
+                                            "D_Minus":  0.037033,
+                                            "SkorTOPSIS":  0.626289,
+                                            "Rank":  15,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Situs peninggalan Kerajaan Klungkung dengan lukisan wayang Kamasan di langit-langit bale dan kolam bersejarah."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.4743,
+                                                              -8.7513
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W13",
+                                            "Nama":  "Pantai Kelingking (Nusa Penida)",
+                                            "Kabupaten":  "Kabupaten Klungkung",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.7513,
+                                            "Longitude":  115.4743,
+                                            "DayaTarik":  98,
+                                            "Akses":  60,
+                                            "Fasilitas":  70,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  35000,
+                                            "JarakBdr":  52,
+                                            "D_Plus":  0.025259,
+                                            "D_Minus":  0.039177,
+                                            "SkorTOPSIS":  0.607993,
+                                            "Rank":  16,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Tebing pesisir berbentuk T-Rex yang mendunia dengan air laut biru jernih di Pulau Nusa Penida."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.0253,
+                                                              -8.1578
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W22",
+                                            "Nama":  "Pantai Lovina",
+                                            "Kabupaten":  "Kabupaten Buleleng",
+                                            "Kategori":  "Bahari \u0026 Snorkeling",
+                                            "Latitude":  -8.1578,
+                                            "Longitude":  115.0253,
+                                            "DayaTarik":  84,
+                                            "Akses":  72,
+                                            "Fasilitas":  80,
+                                            "Rating":  4.4,
+                                            "HargaTiket":  20000,
+                                            "JarakBdr":  89.5,
+                                            "D_Plus":  0.023409,
+                                            "D_Minus":  0.035956,
+                                            "SkorTOPSIS":  0.605679,
+                                            "Rank":  17,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Pantai berpasir hitam vulkanik di Bali utara yang terkenal dengan atraksi lumba-lumba liar di perairan tenang pagi hari."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.1676,
+                                                              -8.8104
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W06",
+                                            "Nama":  "Garuda Wisnu Kencana (GWK)",
+                                            "Kabupaten":  "Kabupaten Badung",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.8104,
+                                            "Longitude":  115.1676,
+                                            "DayaTarik":  93,
+                                            "Akses":  94,
+                                            "Fasilitas":  96,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  85000,
+                                            "JarakBdr":  11.2,
+                                            "D_Plus":  0.029174,
+                                            "D_Minus":  0.042158,
+                                            "SkorTOPSIS":  0.591008,
+                                            "Rank":  18,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Taman budaya berskala internasional dengan patung raksasa Garuda Wisnu Kencana setinggi 121 meter dan panggung seni."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.6476,
+                                                              -8.3347
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W18",
+                                            "Nama":  "Pantai Amed",
+                                            "Kabupaten":  "Kabupaten Karangasem",
+                                            "Kategori":  "Bahari \u0026 Snorkeling",
+                                            "Latitude":  -8.3347,
+                                            "Longitude":  115.6476,
+                                            "DayaTarik":  86,
+                                            "Akses":  68,
+                                            "Fasilitas":  76,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  20000,
+                                            "JarakBdr":  95,
+                                            "D_Plus":  0.024861,
+                                            "D_Minus":  0.035769,
+                                            "SkorTOPSIS":  0.589956,
+                                            "Rank":  19,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Kawasan wisata bahari tenang di timur Bali yang tersohor akan terumbu karang, snorkeling, dan panorama Gunung Agung."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.3869,
+                                                              -8.441
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W21",
+                                            "Nama":  "Air Terjun Tukad Cepung",
+                                            "Kabupaten":  "Kabupaten Bangli",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.441,
+                                            "Longitude":  115.3869,
+                                            "DayaTarik":  84,
+                                            "Akses":  66,
+                                            "Fasilitas":  68,
+                                            "Rating":  4.5,
+                                            "HargaTiket":  25000,
+                                            "JarakBdr":  53.8,
+                                            "D_Plus":  0.024625,
+                                            "D_Minus":  0.034625,
+                                            "SkorTOPSIS":  0.584389,
+                                            "Rank":  20,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Air terjun unik tersembunyi di dalam celah tebing gua yang memantulkan berkas cahaya matahari dramatis."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.5873,
+                                                              -8.4123
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W17",
+                                            "Nama":  "Taman Tirta Gangga",
+                                            "Kabupaten":  "Kabupaten Karangasem",
+                                            "Kategori":  "Budaya \u0026 Sejarah",
+                                            "Latitude":  -8.4123,
+                                            "Longitude":  115.5873,
+                                            "DayaTarik":  88,
+                                            "Akses":  74,
+                                            "Fasilitas":  82,
+                                            "Rating":  4.6,
+                                            "HargaTiket":  45000,
+                                            "JarakBdr":  78.2,
+                                            "D_Plus":  0.023401,
+                                            "D_Minus":  0.032409,
+                                            "SkorTOPSIS":  0.580697,
+                                            "Rank":  21,
+                                            "KelasPot":  "Potensial",
+                                            "Deskripsi":  "Istana air peninggalan Kerajaan Karangasem dengan kolam ikan koi, batu pijakan ikonik, dan taman bertingkat."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.1869,
+                                                              -8.1725
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W23",
+                                            "Nama":  "Air Terjun Sekumpul",
+                                            "Kabupaten":  "Kabupaten Buleleng",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.1725,
+                                            "Longitude":  115.1869,
+                                            "DayaTarik":  92,
+                                            "Akses":  60,
+                                            "Fasilitas":  67,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  30000,
+                                            "JarakBdr":  81,
+                                            "D_Plus":  0.027113,
+                                            "D_Minus":  0.035287,
+                                            "SkorTOPSIS":  0.565496,
+                                            "Rank":  22,
+                                            "KelasPot":  "Cukup Potensial",
+                                            "Deskripsi":  "Gugusan tujuh air terjun megah di tengah lembah hijau Buleleng yang kerap disebut air terjun terindah di Bali."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              114.8058,
+                                                              -8.4197
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W25",
+                                            "Nama":  "Pantai Medewi",
+                                            "Kabupaten":  "Kabupaten Jembrana",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.4197,
+                                            "Longitude":  114.8058,
+                                            "DayaTarik":  76,
+                                            "Akses":  70,
+                                            "Fasilitas":  70,
+                                            "Rating":  4.4,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  74.5,
+                                            "D_Plus":  0.027531,
+                                            "D_Minus":  0.034528,
+                                            "SkorTOPSIS":  0.556376,
+                                            "Rank":  23,
+                                            "KelasPot":  "Cukup Potensial",
+                                            "Deskripsi":  "Pantai berbatu di pesisir barat Bali yang memiliki salah satu ombak kiri terpanjang untuk surfing dengan suasana asri."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              115.6203,
+                                                              -8.7764
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W15",
+                                            "Nama":  "Pantai Diamond (Nusa Penida)",
+                                            "Kabupaten":  "Kabupaten Klungkung",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.7764,
+                                            "Longitude":  115.6203,
+                                            "DayaTarik":  95,
+                                            "Akses":  56,
+                                            "Fasilitas":  66,
+                                            "Rating":  4.7,
+                                            "HargaTiket":  40000,
+                                            "JarakBdr":  64,
+                                            "D_Plus":  0.028892,
+                                            "D_Minus":  0.035245,
+                                            "SkorTOPSIS":  0.549526,
+                                            "Rank":  24,
+                                            "KelasPot":  "Cukup Potensial",
+                                            "Deskripsi":  "Pantai pasir putih eksotis di balik tebing batu kapur timur Nusa Penida dengan tangga pahatan tebing yang dramatis."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              114.8286,
+                                                              -8.3596
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W27",
+                                            "Nama":  "Bunut Bolong",
+                                            "Kabupaten":  "Kabupaten Jembrana",
+                                            "Kategori":  "Alam \u0026 Pegunungan",
+                                            "Latitude":  -8.3596,
+                                            "Longitude":  114.8286,
+                                            "DayaTarik":  66,
+                                            "Akses":  58,
+                                            "Fasilitas":  55,
+                                            "Rating":  4.3,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  84,
+                                            "D_Plus":  0.038892,
+                                            "D_Minus":  0.030492,
+                                            "SkorTOPSIS":  0.43947,
+                                            "Rank":  25,
+                                            "KelasPot":  "Kurang Potensial",
+                                            "Deskripsi":  "Pohon beringin raksasa berusia ratusan tahun yang akarnya membentuk terowongan jalan raya di perbukitan Pekutatan."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              114.5761,
+                                                              -8.3746
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W26",
+                                            "Nama":  "Pantai Baluk Rening",
+                                            "Kabupaten":  "Kabupaten Jembrana",
+                                            "Kategori":  "Pantai",
+                                            "Latitude":  -8.3746,
+                                            "Longitude":  114.5761,
+                                            "DayaTarik":  62,
+                                            "Akses":  64,
+                                            "Fasilitas":  58,
+                                            "Rating":  4.2,
+                                            "HargaTiket":  15000,
+                                            "JarakBdr":  105,
+                                            "D_Plus":  0.040329,
+                                            "D_Minus":  0.03009,
+                                            "SkorTOPSIS":  0.427302,
+                                            "Rank":  26,
+                                            "KelasPot":  "Kurang Potensial",
+                                            "Deskripsi":  "Pantai landai tenang di Jembrana yang populer sebagai wisata keluarga, terapi pasir laut, dan panorama Selat Bali."
+                                        }
+                     },
+                     {
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "type":  "Point",
+                                          "coordinates":  [
+                                                              114.5142,
+                                                              -8.0978
+                                                          ]
+                                      },
+                         "properties":  {
+                                            "ID":  "W24",
+                                            "Nama":  "Pulau Menjangan (TNBB)",
+                                            "Kabupaten":  "Kabupaten Buleleng",
+                                            "Kategori":  "Bahari \u0026 Snorkeling",
+                                            "Latitude":  -8.0978,
+                                            "Longitude":  114.5142,
+                                            "DayaTarik":  93,
+                                            "Akses":  52,
+                                            "Fasilitas":  66,
+                                            "Rating":  4.8,
+                                            "HargaTiket":  60000,
+                                            "JarakBdr":  142,
+                                            "D_Plus":  0.039455,
+                                            "D_Minus":  0.027809,
+                                            "SkorTOPSIS":  0.413424,
+                                            "Rank":  27,
+                                            "KelasPot":  "Kurang Potensial",
+                                            "Deskripsi":  "Pulau konservasi dalam Taman Nasional Bali Barat dengan dinding terumbu karang kelas dunia dan satwa rusa liar."
+                                        }
+                     }
+                 ]
+}
