@@ -13,6 +13,7 @@ import {
   buildPairwiseMatrix,
   calculateAHP,
   calculateTOPSIS,
+  classifyPotential,
   generateArcGISCsv,
   generateArcGISGeoJSON,
   getPotentialColor,
@@ -22,33 +23,32 @@ import AHPPanel from "@/components/AHPPanel";
 import TOPSISPanel from "@/components/TOPSISPanel";
 import DatasetPanel from "@/components/DatasetPanel";
 import AddDestinationModal from "@/components/AddDestinationModal";
-import {
-  Award,
-  BarChart3,
-  Calculator,
-  CheckCircle2,
-  Compass,
-  Database,
-  Download,
-  FileJson,
-  Map as MapIcon,
-  MapPin,
-  Plus,
-  Search,
-  SlidersHorizontal,
-  AlertTriangle,
-} from "lucide-react";
+import { Download, FileJson, Plus, Search } from "lucide-react";
 
 const BaliMap = dynamic(() => import("@/components/BaliMap"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-[540px] lg:h-[610px] rounded-xl border border-slate-200 bg-slate-100 flex items-center justify-center text-sm text-slate-500">
-      Memuat peta interaktif Bali (Leaflet)...
+      Memuat peta...
     </div>
   ),
 });
 
 type ActiveTab = "map" | "ahp" | "topsis" | "data";
+
+const TABS: { id: ActiveTab; label: string }[] = [
+  { id: "map", label: "Peta & Peringkat" },
+  { id: "ahp", label: "Pembobotan AHP" },
+  { id: "topsis", label: "Tahapan TOPSIS" },
+  { id: "data", label: "Dataset & Ekspor" },
+];
+
+const CLASS_ORDER: PotentialClass[] = [
+  "Sangat Potensial",
+  "Potensial",
+  "Cukup Potensial",
+  "Kurang Potensial",
+];
 
 function downloadTextFile(filename: string, content: string, mimeType: string) {
   const blob = new Blob([content], { type: mimeType });
@@ -201,178 +201,128 @@ export default function WebGISDashboard() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top Navbar */}
-      <header className="sticky top-0 z-30 bg-slate-950 text-white border-b border-slate-800 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <header className="sticky top-0 z-30 bg-slate-950 text-white border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-emerald-600 flex items-center justify-center shadow-md">
-              <Compass className="w-5 h-5 text-white" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="SIPETA"
+              className="w-9 h-9 object-contain"
+            />
             <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-base sm:text-lg font-extrabold tracking-tight">
-                  SIPETA BALI
-                </h1>
-                <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                  Web GIS • AHP-TOPSIS
-                </span>
-              </div>
-              <p className="text-xs text-slate-400">
-                SPK Penilaian Potensi Destinasi Wisata Provinsi Bali (9 Kabupaten/Kota)
-              </p>
+              <h1 className="text-lg font-extrabold tracking-tight leading-tight">
+                SIPETA
+              </h1>
+              <p className="text-xs text-slate-400">Destinasi Wisata Bali</p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border ${
-                ahpResult.isConsistent
-                  ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
-                  : "bg-rose-500/20 text-rose-300 border-rose-500/40"
-              }`}
-            >
-              {ahpResult.isConsistent ? (
-                <CheckCircle2 className="w-3.5 h-3.5" />
-              ) : (
-                <AlertTriangle className="w-3.5 h-3.5" />
-              )}
-              CR: {ahpResult.cr.toFixed(4)}
-            </div>
-
             <button
               type="button"
               onClick={handleExportCsv}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-100 border border-slate-700 transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 border border-slate-700 hover:bg-slate-800 transition"
             >
-              <Download className="w-3.5 h-3.5 text-teal-400" />
+              <Download className="w-3.5 h-3.5" />
               CSV ArcGIS
             </button>
             <button
               type="button"
               onClick={handleExportGeoJson}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-100 border border-slate-700 transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 border border-slate-700 hover:bg-slate-800 transition"
             >
-              <FileJson className="w-3.5 h-3.5 text-sky-400" />
+              <FileJson className="w-3.5 h-3.5" />
               GeoJSON
             </button>
             <button
               type="button"
               onClick={() => setIsAddModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-xs font-semibold text-white transition shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-xs font-semibold text-white transition"
             >
               <Plus className="w-3.5 h-3.5" />
-              Destinasi
+              Tambah Destinasi
             </button>
           </div>
         </div>
       </header>
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
-        {/* KPI Cards */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-            <div className="flex items-center justify-between text-xs text-slate-500">
-              <span>Cakupan Data Spasial</span>
-              <MapPin className="w-4 h-4 text-teal-600" />
-            </div>
-            <div className="text-2xl font-extrabold text-slate-900 mt-1">
-              {destinations.length}{" "}
-              <span className="text-sm font-medium text-slate-500">
-                Destinasi
-              </span>
+        {/* KPI Summary: one panel, cells separated by hairlines */}
+        <section className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-xl overflow-hidden">
+          <div className="bg-white p-4">
+            <div className="text-xs text-slate-500">Total Destinasi</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1 tabular-nums">
+              {destinations.length}
             </div>
             <div className="text-[11px] text-slate-500 mt-1">
-              Tersebar di seluruh 9 Kabupaten/Kota Bali
+              di 9 kabupaten/kota
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-            <div className="flex items-center justify-between text-xs text-slate-500">
-              <span>Peringkat #1 Potensi Tertinggi</span>
-              <Award className="w-4 h-4 text-emerald-600" />
-            </div>
+          <div className="bg-white p-4">
+            <div className="text-xs text-slate-500">Potensi Tertinggi</div>
             <div className="text-base font-extrabold text-slate-900 mt-1 truncate">
               {topDestination?.destination.nama ?? "-"}
             </div>
-            <div className="text-[11px] text-emerald-700 font-semibold mt-1">
-              V<sub>1</sub> ={" "}
-              {topDestination ? topDestination.preferenceScore.toFixed(4) : "-"}{" "}
-              • {topDestination?.destination.kabupaten}
+            <div className="text-[11px] text-slate-500 mt-1 tabular-nums">
+              Skor{" "}
+              {topDestination ? topDestination.preferenceScore.toFixed(4) : "-"}
+              {topDestination ? ` • ${topDestination.destination.kabupaten}` : ""}
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-            <div className="flex items-center justify-between text-xs text-slate-500">
-              <span>Konsistensi Bobot AHP</span>
-              <SlidersHorizontal className="w-4 h-4 text-sky-600" />
-            </div>
-            <div className="text-2xl font-extrabold font-mono text-slate-900 mt-1">
+          <div className="bg-white p-4">
+            <div className="text-xs text-slate-500">Konsistensi AHP (CR)</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1 tabular-nums">
               {ahpResult.cr.toFixed(4)}
             </div>
             <div
-              className={`text-[11px] font-semibold mt-1 ${
-                ahpResult.isConsistent ? "text-emerald-700" : "text-rose-600"
+              className={`text-[11px] font-medium mt-1 ${
+                ahpResult.isConsistent ? "text-slate-500" : "text-rose-600"
               }`}
             >
               {ahpResult.isConsistent
-                ? `Valid & Konsisten (λmax = ${ahpResult.lambdaMax.toFixed(3)})`
-                : "CR > 0.10 — Sesuaikan matriks AHP"}
+                ? `Konsisten (λmax = ${ahpResult.lambdaMax.toFixed(3)})`
+                : "CR > 0.10 — sesuaikan matriks AHP"}
             </div>
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-sm">
-            <div className="flex items-center justify-between text-xs text-slate-500">
-              <span>Distribusi Kelas Potensi</span>
-              <BarChart3 className="w-4 h-4 text-amber-600" />
-            </div>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-1 mt-2 text-[11px]">
-              <div className="flex justify-between">
-                <span className="text-emerald-700 font-medium">Sangat Pot.</span>
-                <strong className="font-mono">
-                  {classCounts["Sangat Potensial"]}
-                </strong>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sky-700 font-medium">Potensial</span>
-                <strong className="font-mono">{classCounts["Potensial"]}</strong>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-amber-700 font-medium">Cukup Pot.</span>
-                <strong className="font-mono">
-                  {classCounts["Cukup Potensial"]}
-                </strong>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-rose-700 font-medium">Kurang Pot.</span>
-                <strong className="font-mono">
-                  {classCounts["Kurang Potensial"]}
-                </strong>
-              </div>
+          <div className="bg-white p-4">
+            <div className="text-xs text-slate-500">Kelas Potensi</div>
+            <div className="mt-2 space-y-1 text-[11px]">
+              {CLASS_ORDER.map((cls) => (
+                <div key={cls} className="flex items-center justify-between gap-2">
+                  <span className="flex items-center gap-1.5 text-slate-600 truncate">
+                    <span
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ backgroundColor: getPotentialColor(cls) }}
+                    />
+                    {cls}
+                  </span>
+                  <strong className="tabular-nums text-slate-900">
+                    {classCounts[cls]}
+                  </strong>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Navigation Tabs */}
-        <nav className="flex flex-wrap gap-2 border-b border-slate-200 pb-3">
-          {[
-            { id: "map", label: "Peta GIS & Ranking", icon: MapIcon },
-            { id: "ahp", label: "Pembobotan AHP", icon: SlidersHorizontal },
-            { id: "topsis", label: "Tahapan TOPSIS", icon: Calculator },
-            { id: "data", label: "Dataset & Ekspor ArcGIS", icon: Database },
-          ].map((tab) => {
-            const Icon = tab.icon;
+        {/* Navigation Tabs (underline style, no icons) */}
+        <nav className="flex flex-wrap gap-x-6 gap-y-1 border-b border-slate-200">
+          {TABS.map((tab) => {
             const active = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setActiveTab(tab.id as ActiveTab)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition ${
+                onClick={() => setActiveTab(tab.id)}
+                className={`-mb-px pt-1 pb-3 text-sm font-semibold border-b-2 transition ${
                   active
-                    ? "bg-slate-900 text-white shadow-sm"
-                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                    ? "border-slate-900 text-slate-900"
+                    : "border-transparent text-slate-500 hover:text-slate-800"
                 }`}
               >
-                <Icon className="w-4 h-4" />
                 {tab.label}
               </button>
             );
@@ -382,8 +332,8 @@ export default function WebGISDashboard() {
         {/* TAB 1: MAP & RANKING */}
         {activeTab === "map" && (
           <div className="space-y-6">
-            {/* Filter Bar */}
-            <div className="bg-white rounded-xl border border-slate-200 p-3.5 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {/* Filter Bar: plain controls, no wrapper card */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
@@ -391,7 +341,7 @@ export default function WebGISDashboard() {
                   placeholder="Cari nama wisata atau kabupaten..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
@@ -400,7 +350,7 @@ export default function WebGISDashboard() {
                 onChange={(e) => setRegencyFilter(e.target.value)}
                 className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
-                <option value="ALL">Semua Kabupaten / Kota (9)</option>
+                <option value="ALL">Semua Kabupaten/Kota</option>
                 {BALI_REGENCIES.map((r) => (
                   <option key={r} value={r}>
                     {r}
@@ -427,10 +377,11 @@ export default function WebGISDashboard() {
                 className="w-full px-3 py-2 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-teal-500"
               >
                 <option value="ALL">Semua Kelas Potensi</option>
-                <option value="Sangat Potensial">Sangat Potensial</option>
-                <option value="Potensial">Potensial</option>
-                <option value="Cukup Potensial">Cukup Potensial</option>
-                <option value="Kurang Potensial">Kurang Potensial</option>
+                {CLASS_ORDER.map((cls) => (
+                  <option key={cls} value={cls}>
+                    {cls}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -445,20 +396,15 @@ export default function WebGISDashboard() {
               </div>
 
               {/* Ranked Sidebar */}
-              <div className="lg:col-span-5 xl:col-span-4 bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col h-[540px] lg:h-[610px]">
-                <div className="px-4 py-3 border-b border-slate-200 flex items-center justify-between">
-                  <div>
-                    <h2 className="text-sm font-bold text-slate-900">
-                      Peringkat Potensi Wisata
-                    </h2>
-                    <p className="text-[11px] text-slate-500">
-                      Menampilkan {filteredRanked.length} dari{" "}
-                      {topsisResult.ranked.length} destinasi
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-mono font-semibold text-teal-700 bg-teal-50 px-2 py-0.5 rounded">
-                    AHP-TOPSIS
-                  </span>
+              <div className="lg:col-span-5 xl:col-span-4 bg-white rounded-xl border border-slate-200 flex flex-col h-[540px] lg:h-[610px]">
+                <div className="px-4 py-3 border-b border-slate-200">
+                  <h2 className="text-sm font-bold text-slate-900">
+                    Peringkat Potensi Wisata
+                  </h2>
+                  <p className="text-[11px] text-slate-500">
+                    Menampilkan {filteredRanked.length} dari{" "}
+                    {topsisResult.ranked.length} destinasi
+                  </p>
                 </div>
 
                 <div className="flex-1 overflow-y-auto divide-y divide-slate-100">
@@ -471,14 +417,14 @@ export default function WebGISDashboard() {
                         key={d.id}
                         type="button"
                         onClick={() => setSelectedId(d.id)}
-                        className={`w-full text-left px-4 py-3 transition flex items-start gap-3 ${
+                        className={`w-full text-left px-4 py-3 transition flex items-start gap-3 border-l-4 ${
                           isSelected
-                            ? "bg-teal-50/70 border-l-4 border-l-teal-600"
-                            : "hover:bg-slate-50"
+                            ? "bg-slate-50 border-l-slate-900"
+                            : "border-l-transparent hover:bg-slate-50"
                         }`}
                       >
                         <div
-                          className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5 shadow-xs"
+                          className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5"
                           style={{ backgroundColor: color }}
                         >
                           {item.rank}
@@ -488,20 +434,12 @@ export default function WebGISDashboard() {
                             <span className="text-xs font-bold text-slate-900 truncate">
                               {d.nama}
                             </span>
-                            <span
-                              className="font-mono text-xs font-extrabold shrink-0"
-                              style={{ color }}
-                            >
+                            <span className="text-xs font-bold text-slate-900 tabular-nums shrink-0">
                               {item.preferenceScore.toFixed(4)}
                             </span>
                           </div>
-                          <div className="text-[11px] text-slate-500 mt-0.5 flex items-center justify-between">
-                            <span className="truncate">
-                              {d.kabupaten} • {d.kategori}
-                            </span>
-                            <span className="text-[10px] font-medium text-slate-400">
-                              {d.id}
-                            </span>
+                          <div className="text-[11px] text-slate-500 mt-0.5 truncate">
+                            {d.kabupaten} • {d.kategori}
                           </div>
                           <div className="mt-1.5 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                             <div
@@ -529,43 +467,36 @@ export default function WebGISDashboard() {
             </div>
 
             {/* Selected Destination Detail + Regency Summary */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
               {selectedResult && (
-                <div className="lg:col-span-7 bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                  <div className="flex flex-wrap items-start justify-between gap-3 pb-4 border-b border-slate-100">
+                <div className="lg:col-span-7 bg-white rounded-xl border border-slate-200 p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="px-2.5 py-0.5 rounded-full text-xs font-bold text-white"
-                          style={{
-                            backgroundColor: getPotentialColor(
-                              selectedResult.potentialClass
-                            ),
-                          }}
-                        >
-                          Peringkat #{selectedResult.rank} •{" "}
-                          {selectedResult.potentialClass}
-                        </span>
-                        <span className="text-xs font-mono text-slate-400">
-                          {selectedResult.destination.id}
-                        </span>
-                      </div>
+                      <span
+                        className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold text-white"
+                        style={{
+                          backgroundColor: getPotentialColor(
+                            selectedResult.potentialClass
+                          ),
+                        }}
+                      >
+                        Peringkat #{selectedResult.rank} •{" "}
+                        {selectedResult.potentialClass}
+                      </span>
                       <h3 className="text-lg font-extrabold text-slate-900 mt-2">
                         {selectedResult.destination.nama}
                       </h3>
                       <p className="text-xs text-slate-500">
                         {selectedResult.destination.kabupaten} •{" "}
-                        {selectedResult.destination.kategori} • WGS84 (
-                        {selectedResult.destination.latitude.toFixed(4)},{" "}
-                        {selectedResult.destination.longitude.toFixed(4)})
+                        {selectedResult.destination.kategori}
                       </p>
                     </div>
                     <div className="text-right">
                       <div className="text-[11px] text-slate-500">
-                        Skor Preferensi TOPSIS (V<sub>i</sub>)
+                        Skor Preferensi
                       </div>
                       <div
-                        className="text-2xl font-extrabold font-mono"
+                        className="text-3xl font-extrabold tabular-nums"
                         style={{
                           color: getPotentialColor(
                             selectedResult.potentialClass
@@ -574,18 +505,14 @@ export default function WebGISDashboard() {
                       >
                         {selectedResult.preferenceScore.toFixed(4)}
                       </div>
-                      <div className="text-[10px] font-mono text-slate-500">
-                        D<sup>+</sup>={selectedResult.dPlus.toFixed(4)} | D
-                        <sup>&minus;</sup>={selectedResult.dMinus.toFixed(4)}
-                      </div>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                  <p className="text-xs text-slate-600 mt-4 leading-relaxed">
                     {selectedResult.destination.deskripsi}
                   </p>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-5 mt-4 pt-4 border-t border-slate-100">
                     {CRITERIA.map((c, idx) => {
                       const raw = selectedResult.rawValues[idx];
                       const display =
@@ -597,20 +524,15 @@ export default function WebGISDashboard() {
                           ? `${raw.toFixed(1)} / 5.0`
                           : `${raw} / 100`;
                       return (
-                        <div
-                          key={c.code}
-                          className="p-3 rounded-lg bg-slate-50 border border-slate-100"
-                        >
-                          <div className="flex items-center justify-between text-[11px] text-slate-500">
-                            <span>
-                              {c.code} {c.shortLabel}
-                            </span>
-                            <span className="font-mono text-[10px] text-teal-700">
-                              w={(ahpResult.weights[idx] * 100).toFixed(1)}%
-                            </span>
+                        <div key={c.code}>
+                          <div className="text-[11px] text-slate-500">
+                            {c.code} {c.shortLabel}
                           </div>
-                          <div className="text-sm font-bold text-slate-900 mt-1">
+                          <div className="text-sm font-bold text-slate-900 mt-0.5 tabular-nums">
                             {display}
+                          </div>
+                          <div className="text-[11px] text-slate-400 tabular-nums">
+                            bobot {(ahpResult.weights[idx] * 100).toFixed(1)}%
                           </div>
                         </div>
                       );
@@ -620,14 +542,11 @@ export default function WebGISDashboard() {
               )}
 
               {/* Average Potential per Regency */}
-              <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-                <h3 className="text-sm font-bold text-slate-900 mb-1">
+              <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-5">
+                <h3 className="text-sm font-bold text-slate-900 mb-4">
                   Rata-Rata Potensi per Kabupaten/Kota
                 </h3>
-                <p className="text-[11px] text-slate-500 mb-3">
-                  Agregasi spasial nilai preferensi TOPSIS di 9 wilayah administratif Bali.
-                </p>
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   {regencySummary.map((r, idx) => (
                     <div key={r.regency} className="space-y-1">
                       <div className="flex items-center justify-between text-xs">
@@ -637,15 +556,18 @@ export default function WebGISDashboard() {
                             ({r.count})
                           </span>
                         </span>
-                        <span className="font-mono font-bold text-slate-900">
+                        <span className="font-bold text-slate-900 tabular-nums">
                           {r.avgScore.toFixed(4)}
                         </span>
                       </div>
                       <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500"
+                          className="h-full rounded-full"
                           style={{
                             width: `${Math.round(r.avgScore * 100)}%`,
+                            backgroundColor: getPotentialColor(
+                              classifyPotential(r.avgScore)
+                            ),
                           }}
                         />
                       </div>
@@ -696,12 +618,10 @@ export default function WebGISDashboard() {
       <footer className="border-t border-slate-200 bg-white mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
           <div>
-            <strong>SIPETA BALI</strong> — UAS Decision Support &amp; Geography
-            Information Systems (AHP-TOPSIS)
+            <strong>SIPETA</strong> · Destinasi Wisata Bali — UAS Decision
+            Support &amp; Geography Information Systems
           </div>
-          <div>
-            Koordinat Referensi: WGS 1984 (EPSG:4326) • Siap Integrasi ArcGIS
-          </div>
+          <div>WGS 1984 (EPSG:4326)</div>
         </div>
       </footer>
 

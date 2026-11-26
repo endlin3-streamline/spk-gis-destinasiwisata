@@ -3,12 +3,7 @@
 import { AHP_PRESETS, CRITERIA } from "@/data/baliDestinations";
 import { formatSaatyValue } from "@/lib/ahpTopsis";
 import { AHPResult } from "@/types/tourism";
-import {
-  CheckCircle2,
-  AlertTriangle,
-  RotateCcw,
-  SlidersHorizontal,
-} from "lucide-react";
+import { RotateCcw } from "lucide-react";
 
 const SAATY_OPTIONS: { value: number; label: string }[] = [
   { value: 9, label: "9 — Mutlak lebih penting" },
@@ -38,6 +33,9 @@ interface AHPPanelProps {
   onResetDefault: () => void;
 }
 
+const TH = "py-2.5 px-2 text-xs font-medium text-slate-500";
+const CODE = "px-1 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px]";
+
 export default function AHPPanel({
   upperTriangle,
   ahpResult,
@@ -45,18 +43,20 @@ export default function AHPPanel({
   onApplyPreset,
   onResetDefault,
 }: AHPPanelProps) {
+  const maxWeight = Math.max(...ahpResult.weights);
+
   return (
     <div className="space-y-6">
       {/* Presets & Reset */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+      <div className="bg-white rounded-xl border border-slate-200 p-5">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div>
-            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-teal-600" />
-              Skenario Pembobotan Kriteria AHP
+            <h2 className="text-base font-bold text-slate-900">
+              Skenario Pembobotan
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Pilih preset pakar atau ubah langsung nilai perbandingan berpasangan skala Saaty (1–9) di matriks bawah.
+              Pilih preset atau ubah nilai perbandingan (skala Saaty 1–9) di
+              matriks bawah.
             </p>
           </div>
           <button
@@ -75,9 +75,9 @@ export default function AHPPanel({
               key={preset.id}
               type="button"
               onClick={() => onApplyPreset(preset.upperTriangle)}
-              className="text-left p-3.5 rounded-lg border border-slate-200 hover:border-teal-500 hover:bg-teal-50/40 transition group"
+              className="text-left p-3.5 rounded-lg border border-slate-200 hover:border-slate-400 hover:bg-slate-50 transition"
             >
-              <div className="text-sm font-semibold text-slate-800 group-hover:text-teal-700">
+              <div className="text-sm font-semibold text-slate-800">
                 {preset.name}
               </div>
               <p className="text-xs text-slate-500 mt-1 leading-relaxed">
@@ -88,81 +88,76 @@ export default function AHPPanel({
         </div>
       </div>
 
-      {/* Consistency Check Banner + Weights */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Consistency Check + Weights */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Consistency Metrics */}
-        <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between gap-2 mb-3">
-              <h3 className="text-sm font-bold text-slate-900">
-                Uji Konsistensi AHP (Saaty)
-              </h3>
-              {ahpResult.isConsistent ? (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  KONSISTEN (CR &le; 0.10)
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  TIDAK KONSISTEN (CR &gt; 0.10)
-                </span>
-              )}
-            </div>
+        <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200 p-5">
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-sm font-bold text-slate-900">
+              Uji Konsistensi
+            </h3>
+            <span
+              className={`inline-flex items-center gap-1.5 text-xs font-semibold ${
+                ahpResult.isConsistent ? "text-emerald-700" : "text-rose-700"
+              }`}
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  ahpResult.isConsistent ? "bg-emerald-600" : "bg-rose-600"
+                }`}
+              />
+              {ahpResult.isConsistent
+                ? "Konsisten (CR \u2264 0.10)"
+                : "Tidak konsisten (CR > 0.10)"}
+            </span>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3 mt-4">
-              <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-                <div className="text-[11px] text-slate-500">
-                  Eigenvalue Maks (&lambda;<sub>max</sub>)
-                </div>
-                <div className="text-lg font-bold text-slate-900 font-mono mt-0.5">
-                  {ahpResult.lambdaMax.toFixed(4)}
-                </div>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-5 mt-4 pt-4 border-t border-slate-100">
+            <div>
+              <div className="text-[11px] text-slate-500">
+                Eigenvalue Maks (&lambda;<sub>max</sub>)
               </div>
-              <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-                <div className="text-[11px] text-slate-500">
-                  Consistency Index (CI)
-                </div>
-                <div className="text-lg font-bold text-slate-900 font-mono mt-0.5">
-                  {ahpResult.ci.toFixed(4)}
-                </div>
+              <div className="text-lg font-bold text-slate-900 tabular-nums mt-0.5">
+                {ahpResult.lambdaMax.toFixed(4)}
               </div>
-              <div className="p-3 rounded-lg bg-slate-50 border border-slate-100">
-                <div className="text-[11px] text-slate-500">
-                  Random Index (RI, n=6)
-                </div>
-                <div className="text-lg font-bold text-slate-900 font-mono mt-0.5">
-                  {ahpResult.ri.toFixed(2)}
-                </div>
+            </div>
+            <div>
+              <div className="text-[11px] text-slate-500">
+                Consistency Index (CI)
+              </div>
+              <div className="text-lg font-bold text-slate-900 tabular-nums mt-0.5">
+                {ahpResult.ci.toFixed(4)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[11px] text-slate-500">
+                Random Index (RI, n=6)
+              </div>
+              <div className="text-lg font-bold text-slate-900 tabular-nums mt-0.5">
+                {ahpResult.ri.toFixed(2)}
+              </div>
+            </div>
+            <div>
+              <div className="text-[11px] text-slate-500">
+                Consistency Ratio (CR)
               </div>
               <div
-                className={`p-3 rounded-lg border ${
-                  ahpResult.isConsistent
-                    ? "bg-emerald-50/70 border-emerald-200"
-                    : "bg-rose-50/70 border-rose-200"
+                className={`text-lg font-extrabold tabular-nums mt-0.5 ${
+                  ahpResult.isConsistent ? "text-emerald-700" : "text-rose-700"
                 }`}
               >
-                <div className="text-[11px] text-slate-600">
-                  Consistency Ratio (CR)
-                </div>
-                <div
-                  className={`text-lg font-extrabold font-mono mt-0.5 ${
-                    ahpResult.isConsistent ? "text-emerald-700" : "text-rose-700"
-                  }`}
-                >
-                  {ahpResult.cr.toFixed(4)}
-                </div>
+                {ahpResult.cr.toFixed(4)}
               </div>
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+          <div className="mt-5 pt-3 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
             <div>
-              Rumus: <code>CI = (&lambda;max - n) / (n - 1)</code> &nbsp;|&nbsp;{" "}
-              <code>CR = CI / RI</code>
+              <code className={CODE}>CI = (&lambda;max - n) / (n - 1)</code>{" "}
+              <code className={CODE}>CR = CI / RI</code>
             </div>
             <div>
-              Bobot AHP dinyatakan valid apabila <strong>CR &le; 0.10 (10%)</strong>.
+              Bobot valid apabila <strong>CR &le; 0.10</strong>.
             </div>
           </div>
         </div>
@@ -180,14 +175,14 @@ export default function AHPPanel({
                 <div key={c.code} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span className="font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
                         {c.code}
                       </span>
                       <span className="font-semibold text-slate-800">
                         {c.label}
                       </span>
                       <span
-                        className={`text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase ${
+                        className={`text-[11px] font-medium ${
                           c.type === "benefit"
                             ? "bg-emerald-50 text-emerald-700"
                             : "bg-amber-50 text-amber-700"
@@ -196,7 +191,7 @@ export default function AHPPanel({
                         {c.type}
                       </span>
                     </div>
-                    <div className="font-mono font-bold text-slate-900">
+                    <div className="font-bold text-slate-900 tabular-nums">
                       {weight.toFixed(4)}{" "}
                       <span className="text-slate-400 font-normal">
                         ({pct.toFixed(1)}%)
@@ -219,29 +214,26 @@ export default function AHPPanel({
       </div>
 
       {/* Pairwise Comparison Matrix (Interactive) */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+      <div className="bg-white rounded-xl border border-slate-200 p-5">
         <div className="mb-3">
           <h3 className="text-sm font-bold text-slate-900">
-            1. Matriks Perbandingan Berpasangan (Pairwise Comparison Matrix)
+            1. Matriks Perbandingan Berpasangan
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">
-            Ubah sel segitiga atas (berwarna biru muda) untuk membandingkan tingkat kepentingan kriteria baris terhadap kriteria kolom. Segitiga bawah otomatis terisi kebalikannya (1/a<sub>ij</sub>).
+            Ubah sel dropdown (segitiga atas): seberapa penting kriteria baris
+            dibanding kolom. Segitiga bawah terisi otomatis dengan kebalikannya
+            (1/a<sub>ij</sub>).
           </p>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-xs border-collapse">
+          <table className="w-full text-xs border-collapse tabular-nums">
             <thead>
-              <tr className="bg-slate-50 border-y border-slate-200">
-                <th className="py-2.5 px-3 text-left font-semibold text-slate-700">
-                  Kriteria
-                </th>
+              <tr className="border-b border-slate-200">
+                <th className={`${TH} px-3 text-left`}>Kriteria</th>
                 {CRITERIA.map((c) => (
-                  <th
-                    key={c.code}
-                    className="py-2.5 px-2 text-center font-semibold text-slate-700 min-w-[95px]"
-                  >
-                    <div>{c.code}</div>
+                  <th key={c.code} className={`${TH} text-center min-w-[95px]`}>
+                    <div className="text-slate-700">{c.code}</div>
                     <div className="text-[10px] font-normal text-slate-500">
                       {c.shortLabel}
                     </div>
@@ -251,9 +243,9 @@ export default function AHPPanel({
             </thead>
             <tbody className="divide-y divide-slate-100">
               {CRITERIA.map((rowCrit, i) => (
-                <tr key={rowCrit.code} className="hover:bg-slate-50/60">
+                <tr key={rowCrit.code} className="hover:bg-slate-50">
                   <td className="py-2.5 px-3 font-semibold text-slate-800 whitespace-nowrap">
-                    <span className="font-mono text-teal-700 mr-1.5">
+                    <span className="text-slate-400 mr-1.5">
                       {rowCrit.code}
                     </span>
                     {rowCrit.shortLabel}
@@ -264,7 +256,7 @@ export default function AHPPanel({
                       return (
                         <td
                           key={colCrit.code}
-                          className="py-2 px-2 text-center font-mono font-bold bg-slate-100/80 text-slate-500"
+                          className="py-2 px-2 text-center font-bold bg-slate-50 text-slate-400"
                         >
                           1
                         </td>
@@ -275,7 +267,7 @@ export default function AHPPanel({
                       return (
                         <td
                           key={colCrit.code}
-                          className="py-1.5 px-1.5 text-center bg-sky-50/50"
+                          className="py-1.5 px-1.5 text-center"
                         >
                           <select
                             aria-label={`${rowCrit.code} dibanding ${colCrit.code}`}
@@ -283,7 +275,7 @@ export default function AHPPanel({
                             onChange={(e) =>
                               onChangePair(i, j, Number(e.target.value))
                             }
-                            className="w-full text-center font-mono text-xs font-semibold text-slate-800 bg-white border border-sky-200 rounded-md py-1 px-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            className="w-full text-center text-xs font-semibold text-slate-800 bg-white border border-slate-300 rounded-md py-1 px-1 focus:outline-none focus:ring-2 focus:ring-teal-500"
                           >
                             {SAATY_OPTIONS.map((opt) => (
                               <option
@@ -300,7 +292,7 @@ export default function AHPPanel({
                     return (
                       <td
                         key={colCrit.code}
-                        className="py-2 px-2 text-center font-mono text-slate-500"
+                        className="py-2 px-2 text-center text-slate-500"
                       >
                         {formatSaatyValue(val)}
                       </td>
@@ -308,12 +300,12 @@ export default function AHPPanel({
                   })}
                 </tr>
               ))}
-              <tr className="bg-slate-50 font-semibold border-t border-slate-200">
+              <tr className="font-semibold border-t border-slate-300">
                 <td className="py-2.5 px-3 text-slate-700">Jumlah Kolom</td>
                 {ahpResult.columnSums.map((sum, j) => (
                   <td
                     key={CRITERIA[j].code}
-                    className="py-2.5 px-2 text-center font-mono text-slate-800"
+                    className="py-2.5 px-2 text-center text-slate-800"
                   >
                     {sum.toFixed(4)}
                   </td>
@@ -325,41 +317,37 @@ export default function AHPPanel({
       </div>
 
       {/* Normalized Matrix & Consistency Vector */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+      <div className="bg-white rounded-xl border border-slate-200 p-5">
         <h3 className="text-sm font-bold text-slate-900 mb-3">
-          2. Matriks Normalisasi AHP, Bobot Prioritas &amp; Vektor Konsistensi
+          2. Normalisasi, Bobot &amp; Vektor Konsistensi
         </h3>
         <div className="overflow-x-auto">
-          <table className="w-full text-xs border-collapse">
+          <table className="w-full text-xs border-collapse tabular-nums">
             <thead>
-              <tr className="bg-slate-50 border-y border-slate-200">
-                <th className="py-2.5 px-3 text-left font-semibold text-slate-700">
-                  Kriteria
-                </th>
+              <tr className="border-b border-slate-200">
+                <th className={`${TH} px-3 text-left`}>Kriteria</th>
                 {CRITERIA.map((c) => (
-                  <th
-                    key={c.code}
-                    className="py-2.5 px-2 text-right font-semibold text-slate-700"
-                  >
+                  <th key={c.code} className={`${TH} text-right`}>
                     {c.code}
                   </th>
                 ))}
-                <th className="py-2.5 px-3 text-right font-semibold text-teal-700 bg-teal-50/50">
+                <th className={`${TH} px-3 text-right bg-slate-50 text-slate-800`}>
                   Bobot (W)
                 </th>
-                <th className="py-2.5 px-3 text-right font-semibold text-slate-700">
-                  A &times; W
-                </th>
-                <th className="py-2.5 px-3 text-right font-semibold text-slate-700">
+                <th className={`${TH} px-3 text-right`}>A &times; W</th>
+                <th className={`${TH} px-3 text-right`}>
                   &lambda;<sub>i</sub>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 font-mono">
+            <tbody className="divide-y divide-slate-100">
               {CRITERIA.map((rowCrit, i) => (
-                <tr key={rowCrit.code} className="hover:bg-slate-50/60">
-                  <td className="py-2 px-3 font-sans font-semibold text-slate-800 whitespace-nowrap">
-                    {rowCrit.code} — {rowCrit.shortLabel}
+                <tr key={rowCrit.code} className="hover:bg-slate-50">
+                  <td className="py-2 px-3 font-semibold text-slate-800 whitespace-nowrap">
+                    <span className="text-slate-400 mr-1.5">
+                      {rowCrit.code}
+                    </span>
+                    {rowCrit.shortLabel}
                   </td>
                   {ahpResult.normalizedMatrix[i].map((val, j) => (
                     <td
@@ -369,7 +357,7 @@ export default function AHPPanel({
                       {val.toFixed(4)}
                     </td>
                   ))}
-                  <td className="py-2 px-3 text-right font-bold text-teal-800 bg-teal-50/40">
+                  <td className="py-2 px-3 text-right font-bold text-slate-900 bg-slate-50">
                     {ahpResult.weights[i].toFixed(4)}
                   </td>
                   <td className="py-2 px-3 text-right text-slate-700">
